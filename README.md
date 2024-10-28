@@ -13,7 +13,7 @@
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/azure-snowflake-app.git
+   git clone https://github.com/npbjr/azure-snowflake-app.git
    cd azure-snowflake-app
    ```
 
