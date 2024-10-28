@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  azure-functions:
+    build: .
+    volumes:
+      - .:/home/site/wwwroot
+
+    ports:
+      - "7071:80"
