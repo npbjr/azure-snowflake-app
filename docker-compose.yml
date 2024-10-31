@@ -2,9 +2,10 @@ version: "3.8"
 
 services:
   azure-functions:
-    build: .
-    volumes:
-      - .:/home/site/wwwroot
-
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "7071:80"
+      - "8080:80"
+    environment:
+      - FUNCTIONS_WORKER_RUNTIME=python

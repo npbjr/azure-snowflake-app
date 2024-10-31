@@ -6,3 +6,4 @@ azure-functions
 snowflake-snowpark-python
 pandas
 python-dotenv
+Flask
