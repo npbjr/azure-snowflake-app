@@ -24,9 +24,9 @@
 
 3. **run Browser or Curl**:
    ```bash
-   http://localhost:7071/api/http_snowflake_analytics?name=123
+   http://localhost:7071/api/customerData
    ```
    or curl
    ```bash
-    curl -X GET http://localhost:7071/api/http_snowflake_analytics?name=triximylove
+    curl -X GET http://localhost:7071/api/customerData
     ```
