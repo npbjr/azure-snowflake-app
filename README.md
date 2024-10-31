@@ -24,9 +24,10 @@
 
 3. **run Browser or Curl**:
    ```bash
-   http://localhost:7071/api/customerData
+   http://localhost:7071/api/sales?from=2450874&to=2450936
+
    ```
    or curl
    ```bash
-    curl -X GET http://localhost:7071/api/customerData
-    ```
+   curl -X GET http://localhost:7071/api/sales?from=2450874&to=2450936
+   ```
