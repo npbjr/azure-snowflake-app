@@ -3,12 +3,12 @@ import datetime
 import json
 import logging
 from db import snowflakeDB
-from customerAnalytics.client import CustomerData
+from functions.sales import SalesObject
 
 app = func.FunctionApp()
 
 #connect to snowflake
-sf = snowflakeDB()
+snowflakedb = snowflakeDB()
 # ca = CustomerData(sf.get_session())
 
 # data = ca.query_current_sales_result("WEB_SALES", "2450874", "2450936")
@@ -16,7 +16,7 @@ sf = snowflakeDB()
 
 @app.route(route="customerData", auth_level=func.AuthLevel.ANONYMOUS)
 def customerData(req: func.HttpRequest) -> func.HttpResponse:
-    ca = CustomerData(sf.get_session())
+    ca = SalesObject(snowflakedb.get_session())
     query_param = req.params.get("filterBy")
     if not query_param:
         query_param = "CUSTOMER"
@@ -38,7 +38,7 @@ def customerData(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.route(route="sales", auth_level=func.AuthLevel.ANONYMOUS)
 def sales(req: func.HttpRequest) -> func.HttpResponse:
-    ca = CustomerData(sf.get_session())
+    ca = SalesObject(snowflakedb.get_session())
     from_month = req.params.get("from")
     to_month = req.params.get("to")
     print(type(from_month))

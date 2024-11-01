@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from snowflake.snowpark.functions import col, dateadd, to_date, to_decimal
 import simplejson as json
 from decimal import Decimal
-class CustomerData:
+class SalesObject:
     def __init__(self, session):
         self.session = session
 
@@ -42,12 +42,4 @@ class CustomerData:
             return data
         return [loop_through_values(row.as_dict()) for row in fdf.collect()]
 
-
-    def query(self, table):
-      
-        df = self.session.table(f"{table}").select("*").limit(10).collect()
-        # df = self.session.sql(f"select * from  {self.SNOWFLAKE_DB}.TPCDS_SF100TCL.{table} LIMIT 100")
-        return [row.as_dict() for row in df]
-
-        
 
