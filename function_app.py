@@ -10,7 +10,6 @@ credentials = dotenv_values(".env")
 
 instances = {"app": app, "credentials": credentials , "db": db(credentials), "func":func}
 
-
 create_function_apps(**instances)
 
 

@@ -3,7 +3,6 @@ from snowflake.snowpark.functions import col, dateadd, to_date, to_decimal
 import simplejson as json
 from decimal import Decimal
 
-
 class Sales:
     def __init__(self, **kwargs):
 
@@ -21,7 +20,6 @@ class Sales:
         """
             This function will return the sales from and to month  
         """
-
         sql_res = self.db.execute('GET_SALES_CUSTOMER_INFO.sql')
  
         def convert_decimal_object_to_float(d):

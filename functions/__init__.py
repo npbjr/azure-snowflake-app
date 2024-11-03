@@ -3,14 +3,9 @@ from .sales import Sales
 
 def create_function_apps(**kwargs):
 
-
-    db = kwargs.get('db')
-
     app = kwargs.get('app')
 
     func = kwargs.get('func')
-
-    credentials = kwargs.get('credentials')
 
     sales_info = Sales(**kwargs)
  
@@ -21,17 +16,17 @@ def create_function_apps(**kwargs):
         to_month = req.params.get("to")
 
         try:
-
             result = sales_info.get_sales("WEB_SALES", from_month, to_month)
 
             return func.HttpResponse(
                 body=json.dumps(result),
                 status_code=200,
-                mimetype="application/json"
-            )
+                mimetype="application/json")
+
         except Exception as e:
+
             print(e)
+
             return func.HttpResponse(
                 "Error ",
-                status_code=500
-            )
+                status_code=500)
