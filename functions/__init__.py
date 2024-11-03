@@ -30,7 +30,8 @@ def create_function_apps(**kwargs):
                 mimetype="application/json"
             )
         except Exception as e:
-             return func.HttpResponse(
+            print(e)
+            return func.HttpResponse(
                 "Error ",
                 status_code=500
             )
