@@ -2,17 +2,20 @@ from datetime import datetime, timedelta
 from snowflake.snowpark.functions import col, dateadd, to_date, to_decimal
 import simplejson as json
 from decimal import Decimal
-class SalesObject:
-    def __init__(self, session):
-        self.session = session
 
-    def query_predicted_sales_result(self):
+
+class Sales:
+    def __init__(self, **kwargs):
+
+        self.db = kwargs.get('db').get_session()
+
+    def get_predicted_sales_result(self):
         """
             This function will return the data stored in snowflake(the predicted sales data) 
         """
         return {"data":{}}
 
-    def query_current_sales_result(self, table, from_month, to_month):
+    def get_sales(self, table, from_month, to_month):
         
         """
             This function will return the sales from and to month  
@@ -20,7 +23,7 @@ class SalesObject:
 
         # julian_to_date = lambda x: datetime(4713, 1, 1) + timedelta(days=x-2451)
 
-        df = self.session.table(f"{table}").select("*").limit(50)
+        df = self.db.table(f"{table}").select("*").limit(50)
 
        
         fdf = df.filter(
