@@ -13,7 +13,7 @@ def create_function_apps(**kwargs):
     credentials = kwargs.get('credentials')
 
     sales_info = Sales(**kwargs)
-
+ 
     @app.route(route="sales", auth_level=func.AuthLevel.ANONYMOUS)
     def sales(req: func.HttpRequest) -> func.HttpResponse:
 
@@ -22,7 +22,7 @@ def create_function_apps(**kwargs):
 
         try:
 
-            result = sales_info.get_sales("WEB_SALES", "2450874", "2450936")
+            result = sales_info.get_sales("WEB_SALES", from_month, to_month)
 
             return func.HttpResponse(
                 body=json.dumps(result),

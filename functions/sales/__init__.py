@@ -7,7 +7,8 @@ from decimal import Decimal
 class Sales:
     def __init__(self, **kwargs):
 
-        self.db = kwargs.get('db').get_session()
+        self.db = kwargs.get('db')
+        self.session = self.db.session
 
     def get_predicted_sales_result(self):
         """
@@ -23,12 +24,11 @@ class Sales:
 
         # julian_to_date = lambda x: datetime(4713, 1, 1) + timedelta(days=x-2451)
 
-        df = self.db.table(f"{table}").select("*").limit(50)
-
-       
-        fdf = df.filter(
-            (col("WS_SHIP_DATE_SK") >= from_month) & (col("WS_SHIP_DATE_SK") >= to_month)
-        )
+        # df = self.db.table(f"{table}").select("*").limit(50)
+        fdf = self.db.execute('GET_SALES_WITH_CUSTOMER_NAMES.sql')
+        # fdf = df.filter(
+        #     (col("WS_SHIP_DATE_SK") >= from_month) & (col("WS_SHIP_DATE_SK") >= to_month)
+        # )
         # final_res = fdf.apply(fdf.to_numeric, downcast='float')
         # df = self.session.sql(f"select * from  {self.SNOWFLAKE_DB}.TPCDS_SF100TCL.{table} LIMIT 100")
 
@@ -43,6 +43,6 @@ class Sales:
                     v = float(v)
                 data[k] = v
             return data
-        return [loop_through_values(row.as_dict()) for row in fdf.collect()]
+        return [loop_through_values(row.as_dict()) for row in fdf]
 
 

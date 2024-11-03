@@ -25,11 +25,15 @@ class snowflakdb:
         self.session = Session.builder.configs(self.config_params).create()
 
         print("---- Connection Success ----")
-        print(self.session)
 
-    def get_session(self):
+    def session(self):
         return self.session
 
-# if __name__ == "__main__":
-#     sfdb = SnowFlakeDb()
-#     print(sfdb.query("CUSTOMER"))
+    def execute(self, script):
+        with open(f'db/sql_scripts/{script}', 'r') as text:
+            sql = text.read()
+        return self.session.sql(sql).limit(50).collect()
+
+    def get_json_format(self, sql_result): ...
+
+
